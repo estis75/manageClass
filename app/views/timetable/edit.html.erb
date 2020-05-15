@@ -20,7 +20,15 @@
         <% if cl.blank? %>
           <td><%= link_to "edit", "edit/" + @arr[day] + "/" + th.to_s %></td>
         <% else %>
-          <td><%= link_to cl.classname, "edit/" + @arr[day] + "/" + th.to_s %></td>
+          <% if cl.classname == "" %>
+            <% if cl.url.length > 8 %>
+              <td><%= link_to cl.url.gsub("http://", "").gsub("https://", "")[0..8] + "...", "edit/" + @arr[day] + "/" + th.to_s %></td>
+            <% else%>
+              <td><%= link_to cl.url, "edit/" + @arr[day] + "/" + th.to_s %></td>
+            <% end %>
+          <% else %>
+            <td><%= link_to cl.classname, "edit/" + @arr[day] + "/" + th.to_s %></td>
+          <% end %>
         <% end %>
       <% end %>
     </tr>
