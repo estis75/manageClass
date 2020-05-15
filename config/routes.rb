@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   patch 'timetable/edit/:day/:th', to:'timetable#form'
   post 'timetable/edit/:day/:th', to:'timetable#createClassinfo'
   patch 'timetable/form', to:'timetable#form'
+  post 'timetable/delete/:day/:th', to:'timetable#delete'
 #  get 'timetable/formtable', to:'timetable#createClasstable'
   
   resources :users

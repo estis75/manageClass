@@ -1,4 +1,12 @@
 <h1>edit <%= params[:day] + ' ' + params[:th].to_s %>th</h1>
+<% if @state == 1%>
+<%= form_tag controller: "timetable", action: "delete" do %>
+  <% hidden_field_tag "day", {value: params[:day]} %>
+  <% hidden_field_tag "th", {value: params[:th]} %>
+  <%= submit_tag "delete" %>
+<% end %>
+<% end %>
+
 <% if @classinfo.errors.any? %>
 <ul>
   <% @classinfo.errors.full_messages.each do |err| %>
@@ -10,18 +18,14 @@
 <% if @state == 0 %>
   <%= form_for(@classinfo, url:{controller: 'timetable', action:'form'}) do |form| %>
     <table>
-    <tr><th>URL</th>
-      <td><%= form.text_field :url %></td>
-    </tr>
-    <tr><th>ClassName(必要であれば)</th>
-      <td><%= form.text_field :classname %></td>
-    </tr>
-    <tr><th>Day</th>
-      <td><%= form.text_field :day, value: params[:day] %></td>
-    </tr>
-    <tr><th>th</th>
-      <td><%= form.text_field :th, value: params[:th] %></td>
-    </tr>
+      <tr><th>URL</th>
+        <td><%= form.text_field :url %></td>
+      </tr>
+      <tr><th>ClassName(必要であれば)</th>
+        <td><%= form.text_field :classname %></td>
+      </tr>
+      <%= form.hidden_field :day, {value: params[:day]} %>
+      <%= form.hidden_field :th, {value: params[:th]} %>
       <tr><th></th>
         <td><%= form.submit "register" %></td>
       </tr>
@@ -29,22 +33,19 @@
   <% end %>
 <% elsif @state == 1 %>
   <%= form_for(@classinfo, url:{controller: 'timetable', action:'form'}) do |form| %>
-  <table>
-    <tr><th>URL</th>
-      <td><%= form.text_field :url %></td>
-    </tr>
-    <tr><th>ClassName(必要であれば)</th>
-      <td><%= form.text_field :classname %></td>
-    </tr>
-    <tr><th>Day</th>
-      <td><%= form.text_field :day, value: params[:day] %></td>
-    </tr>
-    <tr><th>th</th>
-      <td><%= form.text_field :th, value: params[:th] %></td>
-    </tr>
-    <tr><th></th>
-      <td><%= form.submit "update" %></td>
-    </tr>
-  </table>
+    <table>
+      <tr><th>URL</th>
+        <td><%= form.text_field :url %></td>
+      </tr>
+      <tr><th>ClassName(必要であれば)</th>
+        <td><%= form.text_field :classname %></td>
+      </tr>
+      <%= form.hidden_field :day, {value: params[:day]} %>
+      <%= form.hidden_field :th, {value: params[:th]} %>
+      <tr><th></th>
+        <td><%= form.submit "update" %></td>
+      </tr>
+    </table>
   <% end %>
+
 <% end %>

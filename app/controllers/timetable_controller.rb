@@ -66,6 +66,7 @@ class TimetableController < ApplicationController
   end
 
   def createClassinfo
+    @state = 0
     @classinfo = Classinfo.new(classinfo_params)
     if @classinfo.save
       @classtable = Classtable.new(classid: @classinfo.id, key: current_user.id, day: @classinfo.day, th: @classinfo.th)
@@ -90,6 +91,14 @@ class TimetableController < ApplicationController
 #  end
 
   def delete
+    query = "SELECT * FROM classtables WHERE key = ? AND th = ? AND day = ?"
+    tp = Classtable.find_by_sql([query, current_user.id, params[:th], params[:day]])[0]
+    data = Classinfo.find(tp.classid)
+    if request.post? then
+      data.destroy
+      tp.destroy
+      redirect_to '/timetable/edit'
+    end
   end
 
   def classinfo_params
