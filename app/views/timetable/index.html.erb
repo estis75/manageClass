@@ -18,7 +18,15 @@
         <% if cl.blank? %>
           <td><% cl %></td>
         <% else %>
-          <td><%= link_to cl.classname, cl.url %></td>
+          <% if cl.classname == "" %>
+            <% if cl.url.length > 8 %>
+              <td><%= link_to cl.url.gsub("http://", "").gsub("https://", "")[0..8] + "...", cl.url %></td>
+            <% else%>
+              <td><%= link_to cl.url, cl.url %></td>
+            <% end %>
+          <% else %>
+            <td><%= link_to cl.classname, cl.url %></td>
+          <% end %>
         <% end %>
       <% end %>
     </tr>

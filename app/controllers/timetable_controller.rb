@@ -1,4 +1,5 @@
 class TimetableController < ApplicationController
+
   def index
     @arr = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
     if logged_in?
@@ -24,7 +25,7 @@ class TimetableController < ApplicationController
     @arr = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
     if logged_in?
       @timetable = Array.new(7)
-      (0..7).each do |th|
+      (0...7).each do |th|
         @timetable[th] = []
         @arr.each do |str|
           query = "SELECT classid FROM classtables WHERE key = ? AND th = ? AND day = ?"
@@ -67,8 +68,7 @@ class TimetableController < ApplicationController
   def createClassinfo
     @classinfo = Classinfo.new(classinfo_params)
     if @classinfo.save
-      classinfo = Classinfo.find_by(url: @classinfo.url)
-      @classtable = Classtable.new(classid: classinfo.id, key: current_user.id, day: classinfo.day, th: classinfo.th)
+      @classtable = Classtable.new(classid: @classinfo.id, key: current_user.id, day: @classinfo.day, th: @classinfo.th)
       if @classtable.save
         redirect_to '/timetable/edit'
       else
