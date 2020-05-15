@@ -1,0 +1,30 @@
+<h1>edit</h1>
+<table>
+  <%= link_to "Home", root_path %>
+  <% if logged_in? %>
+    <p><%= @current_user.name %>: <%= link_to "log out", logout_path, method: "delete" %></p>
+  <% else %>
+    <p><%= link_to "log in", login_path %></p>
+  <% end %>
+</table>
+
+<% if logged_in? %>
+<p>編集したいものをクリックしてください</p>
+<table>
+  <tr><td></td> <td> Mon. </td><td> Tue. </td><td> Wed. </td><td> Thu. </td><td> Fri. </td><td> Sat. </td></tr>
+  <% (1..6).each do |th| %>
+    <tr>
+      <td><%= th %></td>
+      <% (0..5).each do |day| %>
+        <% cl = @timetable[th-1][day] %>
+        <% if cl.blank? %>
+          <td><%= link_to "edit", "edit/" + @arr[day] + "/" + th.to_s %></td>
+        <% else %>
+          <td><%= link_to cl.classname, "edit/" + @arr[day] + "/" + th.to_s %></td>
+        <% end %>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
+<p><%= link_to "back", '/timetable' %></p>
+<% end %>

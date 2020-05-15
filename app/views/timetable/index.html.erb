@@ -1,0 +1,28 @@
+<h1>index</h1>
+<table>
+  <% if logged_in? %>
+    <%= link_to "Home", root_path %>
+    <p><%= @current_user.name %>: <%= link_to "log out", logout_path, method: "delete" %></p>
+  <% else %>
+    <p><%= link_to "log in", login_path %></p>
+  <% end %>
+</table>
+
+<% if !@timetable.blank? %>
+<table>
+  <tr><td></td> <td> Mon. </td><td> Tue. </td><td> Wed. </td><td> Thu. </td><td> Fri. </td><td> Sat. </td></tr>
+  <% (1...6).each do |th| %>
+    <tr>
+      <td><%= th %></td>
+      <% @timetable[th].each do | cl | %>
+        <% if cl.blank? %>
+          <td><% cl %></td>
+        <% else %>
+          <td><%= link_to cl.classname, cl.url %></td>
+        <% end %>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
+<p><%= link_to "edit", 'timetable/edit' %></p>
+<% end %>

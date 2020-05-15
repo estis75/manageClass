@@ -1,0 +1,29 @@
+<h1>register_form</h1>
+
+<% if @user.errors.any? %>
+<ul>
+  <% @user.errors.full_messages.each do |err| %>
+    <li><%= err %></li>
+  <% end %>
+</ul>
+<% end %>
+<% if @message != "" then %>
+  <%= @message %>
+<% end %>
+
+<%= form_for(@user, url:{controller: 'users', action:'new'}) do |form| %>
+  <table>
+    <tr><th>id</th>
+      <td><%= form.text_field :name %></td>
+    </tr>
+    <tr><th>password<th>
+      <td><%= form.text_field :password %></td>
+    </tr>
+    <tr><th>confirmation<th>
+      <td><%= form.text_field :password_confirmation %></td>
+    </tr>
+    <tr><th></th>
+      <td><%= form.submit "register" %></td>
+    </tr>
+  </table>
+<% end %>

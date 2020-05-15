@@ -1,0 +1,50 @@
+<h1>edit <%= params[:day] + ' ' + params[:th].to_s %>th</h1>
+<% if @classinfo.errors.any? %>
+<ul>
+  <% @classinfo.errors.full_messages.each do |err| %>
+    <li><%= err %></li>
+  <% end %>
+</ul>
+<% end %>
+
+<% if @state == 0 %>
+  <%= form_for(@classinfo, url:{controller: 'timetable', action:'form'}) do |form| %>
+    <table>
+    <tr><th>URL</th>
+      <td><%= form.text_field :url %></td>
+    </tr>
+    <tr><th>ClassName(必要であれば)</th>
+      <td><%= form.text_field :classname %></td>
+    </tr>
+    <tr><th>Day</th>
+      <td><%= form.text_field :day, value: params[:day] %></td>
+    </tr>
+    <tr><th>th</th>
+      <td><%= form.text_field :th, value: params[:th] %></td>
+    </tr>
+      <tr><th></th>
+        <td><%= form.submit "register" %></td>
+      </tr>
+    </table>
+  <% end %>
+<% elsif @state == 1 %>
+  <%= form_for(@classinfo, url:{controller: 'timetable', action:'form'}) do |form| %>
+  <table>
+    <tr><th>URL</th>
+      <td><%= form.text_field :url %></td>
+    </tr>
+    <tr><th>ClassName(必要であれば)</th>
+      <td><%= form.text_field :classname %></td>
+    </tr>
+    <tr><th>Day</th>
+      <td><%= form.text_field :day, value: params[:day] %></td>
+    </tr>
+    <tr><th>th</th>
+      <td><%= form.text_field :th, value: params[:th] %></td>
+    </tr>
+    <tr><th></th>
+      <td><%= form.submit "update" %></td>
+    </tr>
+  </table>
+  <% end %>
+<% end %>
