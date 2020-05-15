@@ -11,7 +11,7 @@
 <% if !@timetable.blank? %>
 <table>
   <tr><td></td> <td> Mon. </td><td> Tue. </td><td> Wed. </td><td> Thu. </td><td> Fri. </td><td> Sat. </td></tr>
-  <% (1...6).each do |th| %>
+  <% (1..7).each do |th| %>
     <tr>
       <td><%= th %></td>
       <% @timetable[th].each do | cl | %>

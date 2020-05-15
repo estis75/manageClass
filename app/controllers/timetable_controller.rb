@@ -2,8 +2,8 @@ class TimetableController < ApplicationController
   def index
     @arr = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
     if logged_in?
-      @timetable = Array.new(6)
-      (1...6).each do |th|
+      @timetable = Array.new(7)
+      (1..7).each do |th|
         @timetable[th] = []
         @arr.each do |str|
           query = "SELECT classid FROM classtables WHERE key = ? AND th = ? AND day = ?"
@@ -23,8 +23,8 @@ class TimetableController < ApplicationController
   def edit
     @arr = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
     if logged_in?
-      @timetable = Array.new(6)
-      (0..5).each do |th|
+      @timetable = Array.new(7)
+      (0..7).each do |th|
         @timetable[th] = []
         @arr.each do |str|
           query = "SELECT classid FROM classtables WHERE key = ? AND th = ? AND day = ?"
