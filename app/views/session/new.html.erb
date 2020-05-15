@@ -6,17 +6,12 @@
 <% end %>
 
 <%= form_for(:session, url: login_path) do |form| %>
-  <table>
-    <tr><th>id</th>
-      <td><%= form.text_field :name %></td>
-    </tr>
-    <tr><th>password</th>
-      <td><%= form.text_field :password %></td>
-    </tr>
-    <tr><th></th>
-      <td><%= form.submit "login" %></td>
-    </tr>
+    <th>id</th>
+      <p><td><%= form.text_field :name %></td></p>
+    <th>password</th>
+      <p><td><%= form.text_field :password %></td></p>
+    <th></th>
+      <p><td><%= form.submit "login" %></td></p>
 
     <p><%= link_to "register", signup_path %></p>
-  </table>
 <% end %>

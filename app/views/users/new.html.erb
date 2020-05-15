@@ -12,18 +12,13 @@
 <% end %>
 
 <%= form_for(@user, url:{controller: 'users', action:'new'}) do |form| %>
-  <table>
-    <tr><th>id</th>
-      <td><%= form.text_field :name %></td>
-    </tr>
-    <tr><th>password<th>
-      <td><%= form.text_field :password %></td>
-    </tr>
-    <tr><th>confirmation<th>
-      <td><%= form.text_field :password_confirmation %></td>
-    </tr>
-    <tr><th></th>
-      <td><%= form.submit "register" %></td>
-    </tr>
-  </table>
+    <th>id</th>
+      <p><td><%= form.text_field :name %></td></p>
+    <th>password<th>
+      <p><td><%= form.text_field :password %></td></p>
+    <th>confirmation<th>
+      <p><td><%= form.text_field :password_confirmation %></td></p>
+    <th></th>
+      <p><td><%= form.submit "register" %></td></p>
+    <p><%= link_to "back", '/login' %></p>
 <% end %>
