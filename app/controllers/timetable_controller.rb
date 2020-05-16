@@ -52,9 +52,11 @@ class TimetableController < ApplicationController
         @classinfo = Classinfo.find(@tp[0].classid)
         @state = 1
         if request.patch? then
-          @classinfo.update classinfo_params
-
-          redirect_to '/timetable/edit'
+          if @classinfo.update classinfo_params
+            redirect_to '/timetable/edit'
+          else 
+            render 'form'
+          end
         end
       else
         @classinfo = Classinfo.new
